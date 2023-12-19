@@ -30,7 +30,7 @@ if (!isset($_SESSION['loggedin'])) {
 <body class="loggedin">
     <nav class="navtop">
         <h1 style="color:white;">Sistema de Login Básico ConfiguroWeb</h1>
-        <a href="perfil.php" style="color:white;"><i class="fas fa-user-circle"></i>Informción de Usuario</a>
+        <a href="perfil.php" style="color:white;"><i class="fas fa-user-circle"></i>Información de Usuario</a>
         <a href="cerrar-sesion.php" style="color:white;"><i class="fas fa-sign-out-alt"></i>Cerrar Sesión</a>
     </nav>
 
