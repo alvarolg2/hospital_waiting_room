@@ -1,15 +1,16 @@
 body {
     font-family: 'Arial', sans-serif;
     background-image: url('../images/hospital-background.png');
-    background-size: cover; /* Cubre todo el fondo */
-    background-position: center; /* Centra la imagen en la página */
-    background-attachment: fixed; /* Hace que la imagen de fondo no se mueva con el scroll */
+    background-size: cover;
+    background-position: center; 
+    background-attachment: fixed;
     margin: 0;
     padding: 0;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
+    padding-top: 60px; /* Ajustar según la altura del appbar */
 }
 
 
@@ -80,7 +81,7 @@ input[type="text"], input[type="password"] {
 
 .create-paciente-button {
     text-decoration: none;
-    background-color: #4CAF50; /* Un color verde, por ejemplo */
+    background-color: #4CAF50; 
     color: white;
     padding: 10px 20px;
     border-radius: 5px;
@@ -88,14 +89,148 @@ input[type="text"], input[type="password"] {
 }
 
 .create-paciente-button:hover {
-    background-color: #45a049; /* Un tono ligeramente más oscuro al pasar el ratón por encima */
+    background-color: #45a049; 
 }
 .form-container {
-    background-color: white; /* Fondo blanco para el contenedor del formulario */
-    padding: 40px; /* Relleno alrededor del contenido del formulario */
-    border-radius: 15px; /* Bordes redondeados */
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Sombra sutil para un efecto elevado */
-    width: 350px; /* Ancho fijo para el contenedor */
-    margin: auto; /* Centrar el contenedor en la página */
-    margin-top: 50px; /* Espacio en la parte superior */
+    background-color: white;
+    padding: 40px; 
+    border-radius: 15px; 
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); 
+    width: 350px; 
+    margin: auto; 
+    margin-top: 50px;
 }
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 10px;
+    padding: 10px;
+}
+
+.grid-item {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+}
+
+.header {
+    background-color: #2c3e50; /* Color de fondo oscuro */
+    color: white; /* Texto en color blanco */
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between; /* Espacio entre los elementos izquierdo y derecho */
+    align-items: center; /* Alinear los elementos verticalmente */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Sombra sutil */
+}
+
+
+.header-left, .header-right a {
+    font-size: 18px; /* Tamaño de fuente más grande */
+    text-decoration: none; /* Remover subrayado de enlaces */
+    color: white; /* Color de texto blanco para contraste */
+}
+
+.header-right a:hover {
+    color: #f39c12; /* Cambio de color al pasar el ratón */
+}
+
+/* Estilos para el contenedor del contenido que no sea el header */
+.content {
+    padding: 20px;
+    /* Ajustar el padding superior si el header tiene un tamaño fijo y deseas que el contenido no se solape */
+    padding-top: 60px; /* Asumiendo que el header es de 50px de alto más 10px de padding */
+}
+
+/* Centrar el grid-container verticalmente usando flexbox */
+/* Asumiendo que .content es el contenedor directo del grid-container */
+.content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centra el contenido verticalmente */
+    align-items: center; /* Centra el contenido horizontalmente */
+    min-height: 100vh; /* Asegura que el content tenga al menos la altura de la ventana */
+}
+
+/* Estilos para el grid */
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Ajusta la cantidad mínima y máxima de columnas */
+    grid-gap: 10px; /* Espaciado entre elementos de la cuadrícula */
+    margin-top: 20px; /* Espacio adicional en la parte superior si es necesario */
+}
+
+.grid-item {
+    background-color: white;
+    display: flex; /* Establece los elementos del grid-item en línea */
+    justify-content: space-between; /* Separa los elementos a los extremos */
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+}
+
+.grid-item.header {
+    background-color: #2c3e50; /* Un fondo distinto para los encabezados */
+    color: white;
+}
+
+.grid-item-content {
+    flex: 1; /* Asigna el espacio disponible de manera equitativa */
+    padding: 0 10px; /* Espaciado dentro de cada contenido */
+    position: relative; /* Para la posición de la pseudo-elemento */
+}
+
+/* Añade una línea divisoria al primer .grid-item-content */
+.grid-item-content:not(:last-child)::after {
+    content: ""; /* Crea un pseudo-elemento */
+    position: absolute; /* Posición absoluta respecto al padre relativo */
+    right: 0; /* Alinear a la derecha del contenido */
+    top: 0; /* Alineación superior */
+    bottom: 0; /* Alineación inferior */
+    border-right: 1px solid #ccc; /* Borde derecho para la línea divisoria */
+}
+
+.header .grid-item-content:not(:last-child)::after {
+    border-right: none;
+}
+
+
+.appbar {
+    background-color: #2c3e50; /* Color de fondo */
+    color: white; /* Color del texto */
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between; /* Separar elementos a ambos extremos */
+    align-items: center; /* Centrar elementos verticalmente */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Sombra para dar profundidad */
+    position: fixed; /* Fijar en la parte superior */
+    width: 100%; /* Ocupar el ancho completo */
+    top: 0; /* Posicionar en la parte superior de la página */
+    z-index: 1000; /* Asegurarse de que esté por encima de otros elementos */
+}
+
+/* Estilo para el texto de bienvenida y el enlace de cerrar sesión */
+.appbar-left {
+    display: flex;
+    align-items: center;
+    padding-left: 20px; /* Espacio antes del enlace */
+    padding-right: 20px;
+}
+
+.appbar-right {
+    display: flex;
+    align-items: center;
+}
+
+.appbar-right a {
+    color: white;
+    padding-left: 20px; /* Espacio antes del enlace */
+    padding-right: 20px;
+    text-decoration: none; /* No subrayado */
+}
+
+.appbar-right a:hover {
+    text-decoration: underline; /* Subrayado al pasar el ratón */
+}
+
+

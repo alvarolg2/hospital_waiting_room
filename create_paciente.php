@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <div class="login-container">
+    <div class="form-container">
         <h2>Añadir Nuevo Paciente</h2>
         <form id="addPacienteForm" action="create_paciente.php" method="post">
             <div class="input-group">
@@ -21,7 +21,7 @@
                 <label for="email">Email:</label>
                 <input type="email" id="email" name="email" required>
             </div>
-            <button type="submit" class="submit-button">Añadir Paciente</button>
+            <button type="submit" class="submit-button">Añadir paciente</button>
         </form>
     </div>
 

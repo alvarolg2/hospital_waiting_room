@@ -23,20 +23,27 @@
             </div>
             <button type="submit" class="submit-button">Iniciar Sesión</button>
         </form>
-        <div class="create-paciente">
+        <div class="create-paciente" id="create-paciente-section">
             <a href="create_paciente.php" class="create-paciente-button">Registrar Nuevo Paciente</a>
         </div>
     </div>
 
     <script>
         function selectRole(role) {
+            console.log('Rol seleccionado:', role); // Mensaje de depuración
             document.getElementById('role').value = role;
             document.getElementById('tab-paciente').classList.remove('active');
             document.getElementById('tab-personal').classList.remove('active');
+
+            var createPacienteSection = document.getElementById('create-paciente-section');
+            console.log('Sección para crear paciente:', createPacienteSection); // Mensaje de depuración
+
             if (role === 'pacientes') {
                 document.getElementById('tab-paciente').classList.add('active');
+                createPacienteSection.style.display = 'block';
             } else {
                 document.getElementById('tab-personal').classList.add('active');
+                createPacienteSection.style.display = 'none';
             }
         }
     </script>
