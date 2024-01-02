@@ -7,10 +7,14 @@ $role = $_POST['role'];
 $table = ($role == 'pacientes') ? 'pacientes' : 'personal';
 $username = $_POST['username'];
 $password = $_POST['password'];
+$superUser = isset($_POST['superuser']) ? 1 : 0;
 
 
 // Preparar consulta SQL
 $query = "SELECT * FROM $table WHERE username = '$username' and password = '$password'";
+if ($role == 'personal') {
+    $query .= " and super_user = $superUser";
+}
 $validate_user = mysqli_query($conexion,$query);
 if(!$validate_user){
    

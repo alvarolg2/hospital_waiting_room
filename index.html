@@ -21,6 +21,10 @@
                 <label for="password">Contraseña:</label>
                 <input type="password" id="password" name="password" required>
             </div>
+            <div class="input-group" id="superuser-group" style="display: none;">
+                <label for="superuser">Administrador:</label>
+                <input type="checkbox" id="superuser" name="superuser">
+            </div>
             <button type="submit" class="submit-button">Iniciar Sesión</button>
         </form>
         <div class="create-paciente" id="create-paciente-section">
@@ -44,6 +48,14 @@
             } else {
                 document.getElementById('tab-personal').classList.add('active');
                 createPacienteSection.style.display = 'none';
+            }
+            var superUserGroup = document.getElementById('superuser-group');
+
+            if (role === 'personal') {
+                superUserGroup.style.display = 'block';
+            } else {
+                superUserGroup.style.display = 'none';
+                document.getElementById('superuser').checked = false; // Reinicia el checkbox
             }
         }
     </script>

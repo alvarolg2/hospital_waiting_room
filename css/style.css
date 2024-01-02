@@ -262,4 +262,11 @@ input[type="text"], input[type="password"] {
     text-decoration: underline; /* Subrayado al pasar el ratón */
 }
 
+#superuser-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
 
+#superuser-group label {
+    margin-right: 10px;
+}
