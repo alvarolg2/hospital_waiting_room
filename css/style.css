@@ -190,6 +190,35 @@ input[type="text"], input[type="password"] {
     border-right: 1px solid #ccc; /* Borde derecho para la línea divisoria */
 }
 
+.grid-item-content a {
+    padding: 5px 10px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    text-decoration: none;
+    color: #333;
+    margin-right: 5px;
+}
+
+.grid-item-content a:hover {
+    background-color: #e0e0e0;
+}
+
+.action-icons {
+    display: flex; /* Usa flexbox para alinear los íconos horizontalmente */
+    justify-content: flex-start; /* Alinea los íconos al principio del contenedor */
+}
+
+.action-icons a {
+    margin-right: 10px; /* Espacio entre íconos */
+    text-decoration: none; /* Elimina el subrayado de los enlaces */
+    /* Otros estilos que desees para los íconos */
+}
+
+.action-icons a:last-child {
+    margin-right: 0; /* Elimina el margen derecho del último ícono */
+}
+
 .header .grid-item-content:not(:last-child)::after {
     border-right: none;
 }

@@ -31,32 +31,39 @@ $result = $conexion->query($sql);
         </div>
     </div>
         <div class="grid-container">
-            <!-- Encabezados de la cuadrícula -->
-            <div class="grid-item header">
-                <div class="grid-item-content">
-                    <strong>Usuario</strong>
-                </div>
-                <div class="grid-item-content">
-                    <strong>Email</strong>
-                </div>
-            </div>
-
-            <!-- Datos de la cuadrícula -->
-            <?php if ($result->num_rows > 0): ?>
-                <?php while($row = $result->fetch_assoc()): ?>
-                    <div class="grid-item">
-                        <div class="grid-item-content">
-                            <?php echo htmlspecialchars($row["username"]); ?>
-                        </div>
-                        <div class="grid-item-content">
-                            <?php echo htmlspecialchars($row["email"]); ?>
-                        </div>
-                    </div>
-                <?php endwhile; ?>
-            <?php else: ?>
-                <p>No se encontraron pacientes.</p>
-            <?php endif; ?>
+    <!-- Encabezados de la cuadrícula -->
+    <div class="grid-item header">
+        <div class="grid-item-content">
+            <strong>Usuario</strong>
+        </div>
+        <div class="grid-item-content">
+            <strong>Email</strong>
+        </div>
+        <div class="grid-item-content">
+            <strong>Acciones</strong>
         </div>
     </div>
+       <!-- Datos de la cuadrícula -->
+    <?php if ($result->num_rows > 0): ?>
+        <?php while($row = $result->fetch_assoc()): ?>
+            <div class="grid-item">
+                <div class="grid-item-content">
+                    <?php echo htmlspecialchars($row["username"]); ?>
+                </div>
+                <div class="grid-item-content">
+                    <?php echo htmlspecialchars($row["email"]); ?>
+                </div>
+                <!-- Columna de acciones con emojis en línea horizontal -->
+                <div class="grid-item-content action-icons">
+                    <a href="edit_paciente.php?id=<?php echo $row["pacientes_id"]; ?>" title="Editar paciente">✏️</a>
+                    <a href="add_meet.php?id=<?php echo $row["pacientes_id"]; ?>" title="Añadir cita">📅</a>
+                </div>
+            </div>
+        <?php endwhile; ?>
+    <?php else: ?>
+        <p>No se encontraron pacientes.</p>
+    <?php endif; ?>
+    </div>
+</div>
 </body>
 </html>
