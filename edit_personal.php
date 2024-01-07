@@ -12,6 +12,16 @@ $user = $_SESSION['user'];
 $personal_id = isset($_GET['id']) ? $_GET['id'] : '';
 $msg = '';
 
+$puestos = array();
+$queryPuestos = "SELECT * FROM puesto"; // Asegúrate de que los nombres de columna y tabla sean correctos
+$resultPuestos = $conexion->query($queryPuestos);
+
+if ($resultPuestos) {
+    while ($puesto = $resultPuestos->fetch_assoc()) {
+        $puestos[] = $puesto;
+    }
+}
+
 // Consultar los datos actuales del personal
 if ($personal_id) {
     $stmt = $conexion->prepare("SELECT * FROM personal WHERE personal_id = ?");
@@ -27,10 +37,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $personal_id = $_POST['personal_id'];
     $username = $_POST['username'];
     $email = $_POST['email'];
+    $puesto_id = $_POST['puesto_id'];
 
-    // Actualizar la base de datos
-    $stmt = $conexion->prepare("UPDATE personal SET username = ?, email = ? WHERE personal_id = ?");
-    $stmt->bind_param("ssi", $username, $email, $personal_id);
+    $stmt = $conexion->prepare("UPDATE personal SET username = ?, email = ?, Puesto_puesto_id = ? WHERE personal_id = ?");
+    $stmt->bind_param("ssii", $username, $email, $puesto_id, $personal_id);
 
     if ($stmt->execute()) {
         $msg = "Datos actualizados con éxito.";
@@ -71,14 +81,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             <div class="input-group">
                 <label for="username">Usuario:</label>
-                <input type="text" id="username2" name="username" value="<?php echo htmlspecialchars($row['username']); ?>" required>
+                <input type="text" id="username" name="username" value="<?php echo htmlspecialchars($row['username']); ?>" required>
             </div>
 
             <div class="input-group">
                 <label for="email">Email:</label>
                 <input type="email" id="email" name="email" value="<?php echo htmlspecialchars($row['email']); ?>" required>
             </div>
-
+            <div class="input-group">
+                <label for="puesto_id">Puesto:</label>
+                <select id="puesto_id" name="puesto_id" required>
+                    <?php foreach ($puestos as $puesto): ?>
+                        <option value="<?php echo $puesto['puesto_id']; ?>" <?php echo $puesto['puesto_id'] == $row['Puesto_puesto_id'] ? 'selected' : ''; ?>>
+                            <?php echo htmlspecialchars($puesto['name']); ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
             <div class="input-group">
                 <button type="submit" class="submit-button">Guardar</button>
             </div>

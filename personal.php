@@ -1,7 +1,9 @@
 <?php
 include 'db_connect.php'; // Asegúrate de que este archivo contiene la lógica de conexión a tu base de datos
 
-$query = "SELECT * FROM personal WHERE is_deleted = 0";
+$query = "SELECT personal.personal_id as personal_id, personal.username, personal.email, puesto.name AS puesto_nombre FROM personal 
+          JOIN puesto ON personal.Puesto_puesto_id = puesto.puesto_id
+          WHERE personal.is_deleted = 0";
 $result = $conexion->query($query);
 ?>
 
@@ -23,6 +25,9 @@ $result = $conexion->query($query);
             <strong>Email</strong>
         </div>
         <div class="grid-item-content">
+            <strong>Puesto</strong>
+         </div>
+        <div class="grid-item-content">
             <strong>Acciones</strong>
         </div>
     </div>
@@ -34,6 +39,9 @@ $result = $conexion->query($query);
                 </div>
                 <div class="grid-item-content">
                     <?php echo htmlspecialchars($row["email"]); ?>
+                </div>
+                <div class="grid-item-content">
+                    <?php echo htmlspecialchars($row["puesto_nombre"]); ?>
                 </div>
                 <div class="grid-item-content action-icons">
                     <a href="edit_personal.php?id=<?php echo $row["personal_id"]; ?>" title="Editar">✏️</a>

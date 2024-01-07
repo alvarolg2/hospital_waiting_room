@@ -16,6 +16,7 @@ $username = $_SESSION['user'];
     <meta charset="UTF-8">
     <title>Página de Inicio</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 <body onload="openTab(null, 'urgencia')">
     <div class="appbar">
@@ -45,6 +46,9 @@ $username = $_SESSION['user'];
 <div id="personal" class="tabcontent">
     <!-- Contenido de Personal -->
 </div>
+<a href="#" id="floatingButton" class="floating-button">
+    <i class="fas fa-plus"></i>
+</a>
     <script>
         function openTab(evt, tabName) {
             var i, tabcontent, tablinks;
@@ -83,8 +87,16 @@ $username = $_SESSION['user'];
             };
             xhr.open("GET", tabName + ".php", true);
             xhr.send();
+            var floatingButton = document.getElementById('floatingButton');
+            switch(tabName) {
+                case 'personal':
+                    floatingButton.href = 'create_personal.php';
+                    floatingButton.style.display = 'flex';
+                    break;
+                default:
+                    floatingButton.style.display = 'none';
+            }
         }
-
         // Añade el event listener para DOMContentLoaded
         document.addEventListener("DOMContentLoaded", function() {
             openTab(null, 'urgencia');

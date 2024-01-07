@@ -279,3 +279,37 @@ input[type="text"], input[type="password"] {
 .tabcontent.active {
     display: block;
 }
+
+.floating-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    background-color: #0d6efd; /* o cualquier color que prefieras */
+    color: white;
+    border-radius: 50%;
+    text-decoration: none;
+    font-size: 20px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    z-index: 10;
+}
+
+.floating-button:hover {
+    background-color: #0b5ed7; /* un tono más oscuro al pasar el ratón */
+}
+
+.floating-button i {
+    pointer-events: none;
+}
+
+select {
+    max-width: 200px; /* Ajusta el ancho máximo */
+    min-width: 100px; /* Ajusta el ancho mínimo */
+    padding: 5px; /* Espaciado interno */
+    border: 1px solid #ccc; /* Borde */
+    box-sizing: border-box; /* Incluye padding y border en el ancho y alto total */
+}
