@@ -6,11 +6,10 @@ body {
     background-attachment: fixed;
     margin: 0;
     padding: 0;
-    display: flex;
+    display: grid;
     justify-content: center;
-    align-items: center;
-    height: 100vh;
-    padding-top: 60px; /* Ajustar según la altura del appbar */
+    align-items: start;
+    padding-top: 70px; /* Ajustar según la altura del appbar */
 }
 
 
@@ -24,9 +23,9 @@ body {
 }
 
 .tabs {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 30px;
+    display: block; /* O `inline-block` según sea necesario */
+    margin-bottom: 30px; /* Espacio entre las pestañas y el contenido */
+    text-align: center; /* Centra las pestañas si se desea */
 }
 
 .tab-button {
@@ -37,6 +36,7 @@ body {
     font-weight: bold;
     color: #5a5a5a;
     transition: color 0.3s, background-color 0.3s;
+    margin: 0 5px
 }
 
 .tab-button:focus, .tab-button.active {
@@ -103,9 +103,10 @@ input[type="text"], input[type="password"] {
 
 .grid-container {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 10px;
+    grid-template-columns: 1fr; /* Una sola columna que ocupa todo el ancho disponible */
+    grid-gap: 10px; /* Espaciado entre elementos de la cuadrícula */
     padding: 10px;
+    width: 100%; /* Se ajustará al contenedor padre */
 }
 
 .grid-item {
@@ -153,12 +154,6 @@ input[type="text"], input[type="password"] {
 }
 
 /* Estilos para el grid */
-.grid-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Ajusta la cantidad mínima y máxima de columnas */
-    grid-gap: 10px; /* Espaciado entre elementos de la cuadrícula */
-    margin-top: 20px; /* Espacio adicional en la parte superior si es necesario */
-}
 
 .grid-item {
     background-color: white;
@@ -206,7 +201,7 @@ input[type="text"], input[type="password"] {
 
 .action-icons {
     display: flex; /* Usa flexbox para alinear los íconos horizontalmente */
-    justify-content: flex-start; /* Alinea los íconos al principio del contenedor */
+    justify-content: center; /* Alinea los íconos al principio del contenedor */
 }
 
 .action-icons a {
@@ -269,4 +264,18 @@ input[type="text"], input[type="password"] {
 
 #superuser-group label {
     margin-right: 10px;
+}
+
+.tabcontent {
+    display: none;
+    padding: 20px;
+    border-radius: 30px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    background-color: white;
+    margin-top: 10px; /* Ajustar según sea necesario */
+}
+
+/* Estilo del contenido activo */
+.tabcontent.active {
+    display: block;
 }
