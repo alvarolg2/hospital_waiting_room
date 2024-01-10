@@ -1,40 +1,59 @@
 <?php
 session_start();
 include 'db_connect.php';
-// Credenciales de acceso a la base de datos
 
 $role = $_POST['role'];
-$table = ($role == 'pacientes') ? 'pacientes' : 'personal';
 $username = $_POST['username'];
 $password = $_POST['password'];
-$superUser = isset($_POST['superuser']) ? 1 : 0;
 
-// Preparar consulta SQL
-$query = "SELECT * FROM $table WHERE username = '$username' and password = '$password'";
+// Diferenciar la consulta SQL según el rol del usuario
 if ($role == 'personal') {
-    $query .= " and super_user = $superUser";
+    // Consulta para el personal
+    $query = "SELECT personal.*, puesto.name as puesto_name FROM personal 
+              LEFT JOIN puesto ON personal.Puesto_puesto_id = puesto.puesto_id 
+              WHERE username = '$username' and password = '$password'";
+} else {
+    // Consulta para pacientes
+    $query = "SELECT * FROM pacientes 
+              WHERE username = '$username' and password = '$password'";
 }
-$validate_user = mysqli_query($conexion,$query);
-if(!$validate_user){
+
+$validate_user = mysqli_query($conexion, $query);
+if (!$validate_user) {
     exit('Usuario incorrecto!');
 }
 
-if($usuario = mysqli_fetch_assoc($validate_user)){
+if ($usuario = mysqli_fetch_assoc($validate_user)) {
     $_SESSION['user'] = $username;
-    $_SESSION['super_user'] = $usuario['super_user']; // Guardar si es superusuario
 
-    if($role == 'personal'){
-        if($usuario['super_user'] == 1){
-            header("location:home_admin.php"); // Redirige si es superusuario
-        }else{
-            header("location:home_personal.php"); // Redirige si es personal normal
+    if ($role == 'personal') {
+        // Lógica para personal
+        $_SESSION['super_user'] = $usuario['super_user'];
+
+        // Verificar si el usuario es un superUser
+        if ($_SESSION['super_user']) {
+            header("location:home_admin.php");
+            exit;
+        }
+
+        $puesto = strtolower($usuario['puesto_name'] ?? '');
+        switch ($puesto) {
+            case 'medico':
+                header("location:home_medico.php");
+                break;
+            case 'recepcionista':
+                header("location:home_recepcionista.php");
+                break;
+            default:
+                header("location:home_admin.php");
+                break;
         }
     } else {
-        header("location:home_pacientes.php"); // Redirige si es paciente
+        // Lógica para pacientes
+        header("location:home_pacientes.php");
     }
     exit;
-}
-else {
+} else {
     exit('Usuario o contraseña incorrectos');
 }
 
