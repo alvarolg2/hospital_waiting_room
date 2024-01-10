@@ -79,9 +79,6 @@ if ($cita) {
     </style>
 </head>
 <body>
-    <!-- Tu estructura existente de la página -->
-
-    <!-- Sección de la cita -->
     <?php if ($cita): ?>
         <div class="tarjeta-cita">
             <h2>Cita Programada</h2>
@@ -94,14 +91,12 @@ if ($cita) {
     <?php endif; ?>
     <script>
     function actualizarTiempoEstimado() {
-        var citaId = <?php echo json_encode($cita['citas_id']); ?>; // Obtiene el ID de la cita actual
+        var citaId = <?php echo json_encode($cita['citas_id']); ?>; 
 
-        // Hacer una llamada AJAX a calcular_tiempo.php
         var xhr = new XMLHttpRequest();
         xhr.open('POST', 'calcular_tiempo.php', true);
         xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
         xhr.onload = function () {
-            // Actualizar la información en la página
             if (this.status == 200) {
                 var tiempoEstimado = this.responseText;
                 document.getElementById('tiempo-estimado').innerText = tiempoEstimado + ' minutos';
@@ -110,7 +105,7 @@ if ($cita) {
         xhr.send('citaId=' + citaId);
     }
 
-    setInterval(actualizarTiempoEstimado, 10000);
+    setInterval(actualizarTiempoEstimado, 60000);
 
     actualizarTiempoEstimado();
 </script>
