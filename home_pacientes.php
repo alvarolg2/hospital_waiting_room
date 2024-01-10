@@ -92,6 +92,27 @@ if ($cita) {
     <?php else: ?>
         <p>No tienes citas programadas.</p>
     <?php endif; ?>
-    
+    <script>
+    function actualizarTiempoEstimado() {
+        var citaId = <?php echo json_encode($cita['citas_id']); ?>; // Obtiene el ID de la cita actual
+
+        // Hacer una llamada AJAX a calcular_tiempo.php
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', 'calcular_tiempo.php', true);
+        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        xhr.onload = function () {
+            // Actualizar la información en la página
+            if (this.status == 200) {
+                var tiempoEstimado = this.responseText;
+                document.getElementById('tiempo-estimado').innerText = tiempoEstimado + ' minutos';
+            }
+        };
+        xhr.send('citaId=' + citaId);
+    }
+
+    setInterval(actualizarTiempoEstimado, 10000);
+
+    actualizarTiempoEstimado();
+</script>
 </body>
 </html>
