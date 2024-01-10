@@ -42,7 +42,7 @@ if ($usuario = mysqli_fetch_assoc($validate_user)) {
                 header("location:home_medico.php");
                 break;
             case 'recepcionista':
-                header("location:home_recepcionista.php");
+                header("location:home_personal.php");
                 break;
             default:
                 header("location:home_admin.php");
