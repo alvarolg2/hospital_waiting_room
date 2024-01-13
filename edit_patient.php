@@ -9,13 +9,13 @@ if (!isset($_SESSION['user'])) {
 
 $user = $_SESSION['user']; 
 
-$pacientes_id = isset($_GET['id']) ? $_GET['id'] : '';
+$patients_id = isset($_GET['id']) ? $_GET['id'] : '';
 $msg = '';
 
-// Consultar los datos actuales del personal
-if ($pacientes_id) {
-    $stmt = $conexion->prepare("SELECT * FROM pacientes WHERE pacientes_id = ?");
-    $stmt->bind_param("i", $pacientes_id);
+// Consultar los datos actuales del staff
+if ($patients_id) {
+    $stmt = $connection->prepare("SELECT * FROM patients WHERE patients_id = ?");
+    $stmt->bind_param("i", $patients_id);
     $stmt->execute();
     $result = $stmt->get_result();
     $row = $result->fetch_assoc();
@@ -24,20 +24,20 @@ if ($pacientes_id) {
 
 // Procesar la actualización
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $pacientes_id = $_POST['pacientes_id'];
+    $patients_id = $_POST['patients_id'];
     $username = $_POST['username'];
     $email = $_POST['email'];
 
-    $stmt = $conexion->prepare("UPDATE pacientes SET username = ?, email = ?  WHERE pacientes_id = ?");
-    $stmt->bind_param("ssi", $username, $email, $pacientes_id);
+    $stmt = $connection->prepare("UPDATE patients SET username = ?, email = ?  WHERE patients_id = ?");
+    $stmt->bind_param("ssi", $username, $email, $patients_id);
 
     if ($stmt->execute()) {
         $msg = "Datos actualizados con éxito.";
         // Vuelve a cargar los datos actualizados
-        header("Location: home_personal.php?tab=citas");
+        header("Location: home_staf.php?tab=appointments");
         exit();
     } else {
-        $msg = "Error al actualizar los datos: " . $conexion->error;
+        $msg = "Error al actualizar los datos: " . $connection->error;
     }
 
     $stmt->close();
@@ -48,7 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Editar Personal</title>
+    <title>Editar Staff</title>
     <link rel="stylesheet" href="css/style.css"> 
 </head>
 <body>
@@ -61,12 +61,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </div>
 </div>
     <div class="form-container">
-        <h2>Editar paciente</h2>
+        <h2>Editar patient</h2>
         <?php if ($msg): ?>
             <p><?php echo $msg; ?></p>
         <?php endif; ?>
-        <form action="edit_paciente.php" method="post">
-            <input type="hidden" name="pacientes_id" value="<?php echo $pacientes_id; ?>">
+        <form action="edit_patient.php" method="post">
+            <input type="hidden" name="patients_id" value="<?php echo $patients_id; ?>">
 
             <div class="input-group">
                 <label for="username">Usuario:</label>

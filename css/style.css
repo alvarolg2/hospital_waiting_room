@@ -74,12 +74,12 @@ input[type="text"], input[type="password"] {
     background-color: #0b5ed7;
 }
 
-.create-paciente {
+.create-patient {
     text-align: center;
     margin-top: 20px;
 }
 
-.create-paciente-button {
+.create-patient-button {
     text-decoration: none;
     background-color: #4CAF50; 
     color: white;
@@ -88,17 +88,18 @@ input[type="text"], input[type="password"] {
     transition: background-color 0.3s;
 }
 
-.create-paciente-button:hover {
+.create-patient-button:hover {
     background-color: #45a049; 
 }
+
 .form-container {
     background-color: white;
-    padding: 40px; 
-    border-radius: 15px; 
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); 
-    width: 350px; 
-    margin: auto; 
-    margin-top: 50px;
+    padding: 40px;
+    border-radius: 20px; /* Bordes más redondeados */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada */
+    width: 100%;
+    max-width: 400px; /* Ancho máximo del formulario */
+    margin: 20px; /* Margen alrededor del formulario */
 }
 
 .grid-container {
@@ -312,4 +313,30 @@ select {
     padding: 5px; /* Espaciado interno */
     border: 1px solid #ccc; /* Borde */
     box-sizing: border-box; /* Incluye padding y border en el ancho y alto total */
+}
+
+textarea {
+    resize: vertical; /* Permite cambiar el tamaño verticalmente */
+}
+
+.alert {
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    color: white;
+}
+
+.alert-success {
+    background-color: #4caf50;
+}
+
+.alert-error {
+    background-color: #f44336;
+}
+
+@media screen and (max-width: 600px) {
+    .form-container {
+        margin: 10px;
+        padding: 20px;
+    }
 }

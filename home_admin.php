@@ -18,7 +18,7 @@ $username = $_SESSION['user'];
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
-<body onload="openTab(null, 'urgencia')">
+<body onload="openTab(null, 'urgency')">
     <div class="appbar">
         <div class="appbar-left">
             Bienvenido, <?php echo htmlspecialchars($username); ?>
@@ -31,20 +31,20 @@ $username = $_SESSION['user'];
     
     <!-- Contenedor de Pestañas -->
 <div class="tabs">
-    <button class="tab-button" onclick="openTab(event, 'urgencia')">Urgencias</button>
-    <button class="tab-button" onclick="openTab(event, 'puesto')">Puesto</button>
-    <button class="tab-button" onclick="openTab(event, 'personal')">Personal</button>
+    <button class="tab-button" onclick="openTab(event, 'urgency')">Urgency</button>
+    <button class="tab-button" onclick="openTab(event, 'job')">Job</button>
+    <button class="tab-button" onclick="openTab(event, 'staff')">Staff</button>
 </div>
 
 <!-- Contenido de las Pestañas -->
-<div id="urgencia" class="tabcontent">
-    <!-- Contenido de Urgencias -->
+<div id="urgency" class="tabcontent">
+    <!-- Contenido de Urgency -->
 </div>
-<div id="puesto" class="tabcontent">
-    <!-- Contenido de Puesto -->
+<div id="job" class="tabcontent">
+    <!-- Contenido de Job -->
 </div>
-<div id="personal" class="tabcontent">
-    <!-- Contenido de Personal -->
+<div id="staff" class="tabcontent">
+    <!-- Contenido de Staff -->
 </div>
 <a href="#" id="floatingButton" class="floating-button">
     <i class="fas fa-plus"></i>
@@ -89,8 +89,8 @@ $username = $_SESSION['user'];
             xhr.send();
             var floatingButton = document.getElementById('floatingButton');
             switch(tabName) {
-                case 'personal':
-                    floatingButton.href = 'create_personal.php';
+                case 'staff':
+                    floatingButton.href = 'create_staff.php';
                     floatingButton.style.display = 'flex';
                     break;
                 default:
@@ -99,7 +99,7 @@ $username = $_SESSION['user'];
         }
         // Añade el event listener para DOMContentLoaded
         document.addEventListener("DOMContentLoaded", function() {
-            openTab(null, 'urgencia');
+            openTab(null, 'urgency');
         });
     </script>
 </body>

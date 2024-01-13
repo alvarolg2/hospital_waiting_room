@@ -18,7 +18,7 @@ $user = $_SESSION['user'];
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
-<body onload="openTab(null, 'pacientes')">
+<body onload="openTab(null, 'patients')">
     <div class="appbar">
         <div class="appbar-left">
             Bienvenido, <?php echo htmlspecialchars($user); ?>
@@ -31,20 +31,12 @@ $user = $_SESSION['user'];
     
     <!-- Contenedor de Pestañas -->
 <div class="tabs">
-    <button class="tab-button" onclick="openTab(event, 'pacientes')">Pacientes</button>
-    <button class="tab-button" onclick="openTab(event, 'citas')">Citas activas</button>
-    <button class="tab-button" onclick="openTab(event, 'citas_historical')">Historico citas</button>
+    <button class="tab-button" onclick="openTab(event, 'appointments_medico')">Appointments</button>
 </div>
 
 <!-- Contenido de las Pestañas -->
-<div id="pacientes" class="tabcontent">
-    <!-- Contenido de Urgencias -->
-</div>
-<div id="citas" class="tabcontent">
-    <!-- Contenido de Puesto -->
-</div>
-<div id="citas_historical" class="tabcontent">
-    <!-- Contenido de Puesto -->
+<div id="appointments_medico" class="tabcontent">
+    <!-- Contenido de Job -->
 </div>
 <a href="#" id="floatingButton" class="floating-button">
     <i class="fas fa-plus"></i>
@@ -89,8 +81,8 @@ $user = $_SESSION['user'];
             xhr.send();
             var floatingButton = document.getElementById('floatingButton');
             switch(tabName) {
-                case 'pacientes':
-                    floatingButton.href = 'create_paciente.php';
+                case 'patients':
+                    floatingButton.href = 'create_patient.php';
                     floatingButton.style.display = 'flex';
                     break;
                 default:
@@ -99,7 +91,7 @@ $user = $_SESSION['user'];
         }
         // Añade el event listener para DOMContentLoaded
         document.addEventListener("DOMContentLoaded", function() {
-            openTab(null, 'pacientes');
+            openTab(null, 'appointments_medico');
         });
     </script>
 </body>

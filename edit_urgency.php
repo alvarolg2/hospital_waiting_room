@@ -9,36 +9,36 @@ if (!isset($_SESSION['user'])) {
 
 $user = $_SESSION['user'];
 
-$urgencia_id = isset($_GET['id']) ? $_GET['id'] : '';
+$urgency_id = isset($_GET['id']) ? $_GET['id'] : '';
 $msg = '';
 
-if ($urgencia_id) {
-    $stmt = $conexion->prepare("SELECT * FROM urgencia WHERE urgencia_id = ?");
-    $stmt->bind_param("i", $urgencia_id);
+if ($urgency_id) {
+    $stmt = $connection->prepare("SELECT * FROM urgency WHERE urgency_id = ?");
+    $stmt->bind_param("i", $urgency_id);
     $stmt->execute();
     $result = $stmt->get_result();
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
     } else {
-        $msg = "No se encontró la urgencia con el ID especificado.";
+        $msg = "No se encontró la urgency con el ID especificado.";
         $row = array('name' => '');  // Asegúrate de que la variable $row esté definida incluso si no se encontraron resultados
     }
     $stmt->close();
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $urgencia_id = $_POST['urgencia_id'];
+    $urgency_id = $_POST['urgency_id'];
     $name = $_POST['name'];
 
-    $stmt = $conexion->prepare("UPDATE urgencia SET name = ? WHERE urgencia_id = ?");
-    $stmt->bind_param("si", $name, $urgencia_id);
+    $stmt = $connection->prepare("UPDATE urgency SET name = ? WHERE urgency_id = ?");
+    $stmt->bind_param("si", $name, $urgency_id);
 
     if ($stmt->execute()) {
         $_SESSION['message'] = "Datos actualizados con éxito.";
         header("Location: home_admin.php");
         exit();
     } else {
-        $msg = "Error al actualizar los datos: " . $conexion->error;
+        $msg = "Error al actualizar los datos: " . $connection->error;
     }
 
     $stmt->close();
@@ -49,7 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Editar Urgencia</title>
+    <title>Editar Urgency</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -62,12 +62,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </div>
 </div>
     <div class="form-container">
-        <h2>Editar Urgencia</h2>
+        <h2>Editar Urgency</h2>
         <?php if ($msg): ?>
             <div class="alert"><?php echo $msg; ?></div>
         <?php endif; ?>
-        <form action="edit_urgencia.php?id=<?php echo $urgencia_id; ?>" method="post">
-            <input type="hidden" name="urgencia_id" value="<?php echo $urgencia_id; ?>">
+        <form action="edit_urgency.php?id=<?php echo $urgency_id; ?>" method="post">
+            <input type="hidden" name="urgency_id" value="<?php echo $urgency_id; ?>">
 
             <div class="input-group">
                 <label for="name">Nombre:</label>

@@ -8,11 +8,11 @@
 <body>
     <div class="login-container">
         <div class="tabs">
-            <button class="tab-button active" onclick="selectRole('pacientes')" id="tab-paciente">Paciente</button>
-            <button class="tab-button" onclick="selectRole('personal')" id="tab-personal">Personal</button>
+            <button class="tab-button active" onclick="selectRole('patients')" id="tab-patient">Patient</button>
+            <button class="tab-button" onclick="selectRole('staff')" id="tab-staff">Staff</button>
         </div>
         <form id="loginForm" action="login.php" method="post">
-            <input type="hidden" id="role" name="role" value="pacientes">
+            <input type="hidden" id="role" name="role" value="patients">
             <div class="input-group">
                 <label for="username">Nombre de usuario:</label>
                 <input type="text" id="username" name="username" required>
@@ -27,8 +27,8 @@
             </div>
             <button type="submit" class="submit-button">Iniciar Sesión</button>
         </form>
-        <div class="create-paciente" id="create-paciente-section">
-            <a href="create_paciente.php" class="create-paciente-button">Registrar Nuevo Paciente</a>
+        <div class="create-patient" id="create-patient-section">
+            <a href="create_patient.php" class="create-patient-button">Registrar Nuevo Patient</a>
         </div>
     </div>
 
@@ -36,22 +36,22 @@
         function selectRole(role) {
             console.log('Rol seleccionado:', role); // Mensaje de depuración
             document.getElementById('role').value = role;
-            document.getElementById('tab-paciente').classList.remove('active');
-            document.getElementById('tab-personal').classList.remove('active');
+            document.getElementById('tab-patient').classList.remove('active');
+            document.getElementById('tab-staff').classList.remove('active');
 
-            var createPacienteSection = document.getElementById('create-paciente-section');
-            console.log('Sección para crear paciente:', createPacienteSection); // Mensaje de depuración
+            var createPatientsection = document.getElementById('create-patient-section');
+            console.log('Sección para crear patient:', createPatientsection); // Mensaje de depuración
 
-            if (role === 'pacientes') {
-                document.getElementById('tab-paciente').classList.add('active');
-                createPacienteSection.style.display = 'block';
+            if (role === 'patients') {
+                document.getElementById('tab-patient').classList.add('active');
+                createPatientsection.style.display = 'block';
             } else {
-                document.getElementById('tab-personal').classList.add('active');
-                createPacienteSection.style.display = 'none';
+                document.getElementById('tab-staff').classList.add('active');
+                createPatientsection.style.display = 'none';
             }
             var superUserGroup = document.getElementById('superuser-group');
 
-            if (role === 'personal') {
+            if (role === 'staff') {
                 superUserGroup.style.display = 'block';
             } else {
                 superUserGroup.style.display = 'none';

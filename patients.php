@@ -1,17 +1,17 @@
 <?php
 include 'db_connect.php'; // Asegúrate de que este archivo contiene la lógica de conexión a tu base de datos
 
-$query = "SELECT personal.personal_id as personal_id, personal.username, personal.email, puesto.name AS puesto_nombre FROM personal 
-          JOIN puesto ON personal.Puesto_puesto_id = puesto.puesto_id
-          WHERE personal.is_deleted = 0";
-$result = $conexion->query($query);
+$query = "SELECT patients.*, (SELECT COUNT(*) FROM appointments WHERE Patients_patients_id = patients.patients_id AND status = 'pending') as tiene_appointment 
+          FROM patients 
+          WHERE is_deleted = 0";
+$result = $connection->query($query);
 ?>
 
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Página de Personal</title>
+    <title>Página de Staff</title>
     <link rel="stylesheet" href="css/style.css"> 
 </head>
 <body>
@@ -25,9 +25,6 @@ $result = $conexion->query($query);
             <strong>Email</strong>
         </div>
         <div class="grid-item-content">
-            <strong>Puesto</strong>
-         </div>
-        <div class="grid-item-content">
             <strong>Acciones</strong>
         </div>
     </div>
@@ -40,22 +37,24 @@ $result = $conexion->query($query);
                 <div class="grid-item-content">
                     <?php echo htmlspecialchars($row["email"]); ?>
                 </div>
-                <div class="grid-item-content">
-                    <?php echo htmlspecialchars($row["puesto_nombre"]); ?>
-                </div>
                 <div class="grid-item-content action-icons">
-                    <a href="edit_personal.php?id=<?php echo $row["personal_id"]; ?>" title="Editar">✏️</a>
-                    <a href="delete_personal.php?id=<?php echo $row["personal_id"]; ?>" title="Eliminar" onclick="return confirmDelete()">🗑️</a>
+                    <?php if ($row['tiene_appointment'] > 0): ?>
+                        <span title="Este patient ya tiene una appointment">⏰</span>
+                    <?php else: ?>
+                        <a href="create_appointment.php?patient_id=<?php echo $row['patients_id']; ?>" title="Crear Appointment">📅</a>
+                    <?php endif; ?>
+                    <a href="edit_patient.php?id=<?php echo $row["patients_id"]; ?>" title="Editar">✏️</a>
+                    <a href="delete_patients.php?id=<?php echo $row["patients_id"]; ?>" title="Eliminar" onclick="return confirmDelete()">🗑️</a>
                 </div>
             </div>
         <?php endwhile; ?>
     <?php else: ?>
-        <p>No se encontraron datos de personal.</p>
+        <p>No se encontraron datos de patients.</p>
     <?php endif; ?>
 </div>
 <script>
 function confirmDelete() {
-    return confirm("¿Estás seguro de que deseas eliminar a este miembro del personal?");
+    return confirm("¿Estás seguro de que deseas eliminar a este patient?");
 }
 </script>
 </body>

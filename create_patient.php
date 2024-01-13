@@ -2,13 +2,13 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Añadir Paciente</title>
+    <title>Añadir Patient</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <div class="form-container">
-        <h2>Añadir Nuevo Paciente</h2>
-        <form id="addPacienteForm" action="create_paciente.php" method="post">
+        <h2>Añadir Nuevo Patient</h2>
+        <form id="addPatientForm" action="create_patient.php" method="post">
             <div class="input-group">
                 <label for="username">Nombre de Usuario:</label>
                 <input type="text" id="username" name="username" required>
@@ -21,19 +21,19 @@
                 <label for="email">Email:</label>
                 <input type="email" id="email" name="email" required>
             </div>
-            <button type="submit" class="submit-button">Añadir paciente</button>
+            <button type="submit" class="submit-button">Añadir patient</button>
         </form>
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            var form = document.getElementById('addPacienteForm');
+            var form = document.getElementById('addPatientForm');
             form.onsubmit = function (e) {
                 e.preventDefault();
 
                 var formData = new FormData(form);
                 var xhr = new XMLHttpRequest();
-                xhr.open('POST', 'call_create_paciente.php', true);
+                xhr.open('POST', 'call_create_patient.php', true);
 
                 xhr.onload = function () {
                     if (xhr.responseText === 'success') {

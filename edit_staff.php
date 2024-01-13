@@ -9,23 +9,23 @@ if (!isset($_SESSION['user'])) {
 
 $user = $_SESSION['user']; 
 
-$personal_id = isset($_GET['id']) ? $_GET['id'] : '';
+$staff_id = isset($_GET['id']) ? $_GET['id'] : '';
 $msg = '';
 
-$puestos = array();
-$queryPuestos = "SELECT * FROM puesto"; // Asegúrate de que los nombres de columna y tabla sean correctos
-$resultPuestos = $conexion->query($queryPuestos);
+$jobs = array();
+$queryJobs = "SELECT * FROM job"; // Asegúrate de que los nombres de columna y tabla sean correctos
+$resultJobs = $connection->query($queryJobs);
 
-if ($resultPuestos) {
-    while ($puesto = $resultPuestos->fetch_assoc()) {
-        $puestos[] = $puesto;
+if ($resultJobs) {
+    while ($job = $resultJobs->fetch_assoc()) {
+        $jobs[] = $job;
     }
 }
 
-// Consultar los datos actuales del personal
-if ($personal_id) {
-    $stmt = $conexion->prepare("SELECT * FROM personal WHERE personal_id = ?");
-    $stmt->bind_param("i", $personal_id);
+// Consultar los datos actuales del staff
+if ($staff_id) {
+    $stmt = $connection->prepare("SELECT * FROM staff WHERE staff_id = ?");
+    $stmt->bind_param("i", $staff_id);
     $stmt->execute();
     $result = $stmt->get_result();
     $row = $result->fetch_assoc();
@@ -34,13 +34,13 @@ if ($personal_id) {
 
 // Procesar la actualización
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $personal_id = $_POST['personal_id'];
+    $staff_id = $_POST['staff_id'];
     $username = $_POST['username'];
     $email = $_POST['email'];
-    $puesto_id = $_POST['puesto_id'];
+    $job_id = $_POST['job_id'];
 
-    $stmt = $conexion->prepare("UPDATE personal SET username = ?, email = ?, Puesto_puesto_id = ? WHERE personal_id = ?");
-    $stmt->bind_param("ssii", $username, $email, $puesto_id, $personal_id);
+    $stmt = $connection->prepare("UPDATE staff SET username = ?, email = ?, Job_job_id = ? WHERE staff_id = ?");
+    $stmt->bind_param("ssii", $username, $email, $job_id, $staff_id);
 
     if ($stmt->execute()) {
         $msg = "Datos actualizados con éxito.";
@@ -48,7 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         header("Location: home_admin.php");
         exit();
     } else {
-        $msg = "Error al actualizar los datos: " . $conexion->error;
+        $msg = "Error al actualizar los datos: " . $connection->error;
     }
 
     $stmt->close();
@@ -59,7 +59,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Editar Personal</title>
+    <title>Editar Staff</title>
     <link rel="stylesheet" href="css/style.css"> 
 </head>
 <body>
@@ -72,12 +72,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </div>
 </div>
     <div class="form-container">
-        <h2>Editar Personal</h2>
+        <h2>Editar Staff</h2>
         <?php if ($msg): ?>
             <p><?php echo $msg; ?></p>
         <?php endif; ?>
-        <form action="edit_personal.php" method="post">
-            <input type="hidden" name="personal_id" value="<?php echo $personal_id; ?>">
+        <form action="edit_staff.php" method="post">
+            <input type="hidden" name="staff_id" value="<?php echo $staff_id; ?>">
 
             <div class="input-group">
                 <label for="username">Usuario:</label>
@@ -89,11 +89,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <input type="email" id="email" name="email" value="<?php echo htmlspecialchars($row['email']); ?>" required>
             </div>
             <div class="input-group">
-                <label for="puesto_id">Puesto:</label>
-                <select id="puesto_id" name="puesto_id" required>
-                    <?php foreach ($puestos as $puesto): ?>
-                        <option value="<?php echo $puesto['puesto_id']; ?>" <?php echo $puesto['puesto_id'] == $row['Puesto_puesto_id'] ? 'selected' : ''; ?>>
-                            <?php echo htmlspecialchars($puesto['name']); ?>
+                <label for="job_id">Job:</label>
+                <select id="job_id" name="job_id" required>
+                    <?php foreach ($jobs as $job): ?>
+                        <option value="<?php echo $job['job_id']; ?>" <?php echo $job['job_id'] == $row['Job_job_id'] ? 'selected' : ''; ?>>
+                            <?php echo htmlspecialchars($job['name']); ?>
                         </option>
                     <?php endforeach; ?>
                 </select>

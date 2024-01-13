@@ -9,13 +9,13 @@ if (!isset($_SESSION['user'])) {
 $user = $_SESSION['user'];
 $msg = '';
 
-$puestos = array();
-$query = "SELECT * FROM puesto"; // Asegúrate de que los nombres de columna y tabla sean correctos
-$result = $conexion->query($query);
+$jobs = array();
+$query = "SELECT * FROM job";
+$result = $connection->query($query);
 
 if ($result) {
     while ($row = $result->fetch_assoc()) {
-        $puestos[] = $row;
+        $jobs[] = $row;
     }
 }
 
@@ -24,19 +24,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST['username'];
     $password = $_POST['password'];
     $email = $_POST['email'];
-    $puesto_id = $_POST['puesto_id'];
+    $job_id = $_POST['job_id'];
 
     // Agregar lógica para validar los datos aquí (importante para seguridad)
 
     // Insertar los datos en la base de datos
-    $stmt = $conexion->prepare("INSERT INTO personal (username, password, email, Puesto_puesto_id) VALUES (?, ?, ?, ?)");
-    $stmt->bind_param("sssi", $username, $password, $email, $puesto_id);
+    $stmt = $connection->prepare("INSERT INTO staff (username, password, email, Job_job_id) VALUES (?, ?, ?, ?)");
+    $stmt->bind_param("sssi", $username, $password, $email, $job_id);
 
     if ($stmt->execute()) {
-        $msg = "Personal creado con éxito.";
+        $msg = "Staff creado con éxito.";
         header("Location: home_admin.php");
     } else {
-        $msg = "Error al crear el personal: " . $conexion->error;
+        $msg = "Error al crear el staff: " . $connection->error;
     }
 
     $stmt->close();
@@ -47,7 +47,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Crear Personal</title>
+    <title>Crear Staff</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <div class="appbar">
@@ -60,11 +60,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </div>
 <body>
 <div class="form-container">
-    <h2>Crear Personal</h2>
+    <h2>Crear Staff</h2>
     <?php if ($msg): ?>
         <p><?php echo $msg; ?></p>
     <?php endif; ?>
-    <form action="create_personal.php" method="post">
+    <form action="create_staff.php" method="post">
         <div class="input-group">
             <label for="username">Usuario:</label>
             <input type="text" id="username" name="username" required>
@@ -78,11 +78,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <input type="email" id="email" name="email" required>
         </div>
         <div class="input-group">
-            <label for="puesto_id">Puesto:</label>
-            <select id="puesto_id" name="puesto_id" required>
-                <?php foreach ($puestos as $puesto): ?>
-                    <option value="<?php echo $puesto['puesto_id']; ?>">
-                        <?php echo htmlspecialchars($puesto['name']); ?>
+            <label for="job_id">Job:</label>
+            <select id="job_id" name="job_id" required>
+                <?php foreach ($jobs as $job): ?>
+                    <option value="<?php echo $job['job_id']; ?>">
+                        <?php echo htmlspecialchars($job['name']); ?>
                     </option>
                 <?php endforeach; ?>
             </select>
