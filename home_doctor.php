@@ -31,11 +31,11 @@ $user = $_SESSION['user'];
     
     <!-- Contenedor de Pestañas -->
 <div class="tabs">
-    <button class="tab-button" onclick="openTab(event, 'appointments_medico')">Appointments</button>
+    <button class="tab-button" onclick="openTab(event, 'appointments_doctor')">Appointments</button>
 </div>
 
 <!-- Contenido de las Pestañas -->
-<div id="appointments_medico" class="tabcontent">
+<div id="appointments_doctor" class="tabcontent">
     <!-- Contenido de Job -->
 </div>
 <a href="#" id="floatingButton" class="floating-button">
@@ -91,7 +91,7 @@ $user = $_SESSION['user'];
         }
         // Añade el event listener para DOMContentLoaded
         document.addEventListener("DOMContentLoaded", function() {
-            openTab(null, 'appointments_medico');
+            openTab(null, 'appointments_doctor');
         });
     </script>
 </body>

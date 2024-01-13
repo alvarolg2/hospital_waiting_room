@@ -14,7 +14,7 @@ $query = "SELECT appointments.*, urgency.name AS urgency_name, urgency.priority 
           FROM appointments
           JOIN urgency ON appointments.Urgency_category_id = urgency.urgency_id
           JOIN staff ON appointments.Staff_staff_id = staff.staff_id
-          JOIN patient ON appointments.Patients_patients_id = patients.patients_id
+          JOIN patients ON appointments.Patients_patients_id = patients.patients_id
           ORDER BY urgency.priority ASC, appointments.create_time ASC";
 $result = $connection->query($query);
 ?>

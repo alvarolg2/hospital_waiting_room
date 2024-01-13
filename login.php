@@ -41,7 +41,7 @@ if ($usuario = mysqli_fetch_assoc($validate_user)) {
         $job = strtolower($usuario['job_name'] ?? '');
         switch ($job) {
             case 'medico':
-                header("location:home_medico.php");
+                header("location:home_doctor.php");
                 break;
             case 'recepcionista':
                 header("location:home_staff.php");
