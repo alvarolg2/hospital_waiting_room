@@ -49,7 +49,7 @@ $user = $_SESSION['user'];
 $query = "SELECT appointments.*, patients.username AS patients_username, TIMESTAMPDIFF(MINUTE, NOW(), appointments.estimated_time) AS tiempo_restante
           FROM appointments 
           JOIN patients ON appointments.Patients_patients_id = patients.patients_id
-          WHERE patients.username = '$user' AND appointments.status = 'pending'
+          WHERE patients.username = '$user' AND appointments.status != 'completed'
           ORDER BY appointments.create_time DESC
           LIMIT 1";
 $result = $connection->query($query);
@@ -65,24 +65,26 @@ if ($appointment) {
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Página de Inicio</title>
-    <style>
-        /* Tus estilos existentes */
-        .tarjeta-appointment {
-            background-color: #f9f9f9;
-            border: 1px solid #ddd;
-            padding: 10px;
-            border-radius: 5px;
-            margin-top: 10px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-    </style>
+    <title>Página de Paciente</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 <body>
+<div class="appbar">
+        <div class="appbar-left">
+            Bienvenido, <?php echo htmlspecialchars($user); ?>
+        </div>
+        <div class="appbar-right">
+            <a href="logout.php">Cerrar sesión</a>
+        </div>
+    </div>
+<div id="callingNotice" class="notification">
+    <!-- El mensaje de aviso se mostrará aquí -->
+</div>
     <?php if ($appointment): ?>
         <div class="tarjeta-appointment">
-            <h2>Appointment Programada</h2>
-            <p><strong>Patient:</strong> <?php echo htmlspecialchars($appointment['patients_username']); ?></p>
+            <h2>Cita programada</h2>
+            <p><strong>Paciente:</strong> <?php echo htmlspecialchars($appointment['patients_username']); ?></p>
             <p><strong>Fecha de Creación:</strong> <?php echo htmlspecialchars($appointment['create_time']); ?></p>
             <p><strong>Tiempo Estimado de Espera:</strong> <?php echo $tiempoEstimado; ?> minutos</p>
         </div>
@@ -108,6 +110,30 @@ if ($appointment) {
     setInterval(actualizarTiempoEstimado, 60000);
 
     actualizarTiempoEstimado();
+
+    function verificarSiSeLlamaAlPaciente() {
+        var appointmentId = <?php echo json_encode($appointment['appointments_id']); ?>;
+
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', 'check_calling_patient.php', true);
+        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        xhr.onload = function() {
+            if (this.status == 200) {
+                var estaSiendoLlamado = this.responseText;
+                if (estaSiendoLlamado == '1') {
+                    var notice = document.getElementById('callingNotice');
+                    notice.innerHTML = '<p>Por favor, pase a consulta.</p>';
+                    notice.style.display = 'block'; // Mostrar el aviso
+                } else {
+                    document.getElementById('callingNotice').style.display = 'none'; // Ocultar el aviso si no se está llamando al paciente
+                }
+            }
+        };
+        xhr.send('appointmentId=' + appointmentId);
+    }
+
+    setInterval(verificarSiSeLlamaAlPaciente, 60000); // Verificar cada 60 segundos
+    verificarSiSeLlamaAlPaciente(); // Verificar al cargar la página
 </script>
 </body>
 </html>

@@ -340,3 +340,24 @@ textarea {
         padding: 20px;
     }
 }
+
+#callingNotice {
+    background-color: #4CAF50; /* Color de fondo */
+    color: white; /* Color de texto */
+    padding: 20px; /* Espaciado interno */
+    margin: 15px 0; /* Margen exterior */
+    text-align: center; /* Alineación del texto */
+    border-radius: 5px; /* Bordes redondeados */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Sombra */
+    font-size: 18px; /* Tamaño del texto */
+    display: none; /* Inicialmente oculto */
+}
+
+.tarjeta-appointment {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}

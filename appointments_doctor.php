@@ -15,6 +15,7 @@ $query = "SELECT appointments.*, urgency.name AS urgency_name, urgency.priority 
           JOIN urgency ON appointments.Urgency_category_id = urgency.urgency_id
           JOIN staff ON appointments.Staff_staff_id = staff.staff_id
           JOIN patients ON appointments.Patients_patients_id = patients.patients_id
+          WHERE appointments.status != 'completed'
           ORDER BY urgency.priority ASC, appointments.create_time ASC";
 $result = $connection->query($query);
 ?>
@@ -62,16 +63,16 @@ $result = $connection->query($query);
                 </div>
                 <div class="grid-item-content action-icons">
                     <!-- Botón para llamar al patient (ejemplo, utilizando JavaScript) -->
-                    <a href="#" onclick="callPatient(<?php echo $row['appointments_id']; ?>);" title="Llamar Patient">📞</a>
+                    <a href="call_patient.php?id=<?php echo $row['appointments_id']; ?>" title="Llamar paciente">📞</a>
                     
                     <!-- Botón para ver detalles de la appointment -->
-                    <a href="show_appointment.php?id=<?php echo $row['appointments_id']; ?>" title="Ver Appointment">👁️</a>
+                    <a href="show_appointment.php?id=<?php echo $row['appointments_id']; ?>" title="Ver cita">👁️</a>
 
                     <!-- Botón para editar la appointment (opcional si no se necesita editar) -->
                     <!-- <a href="edit_appointments.php?id=<?php echo $row['appointments_id']; ?>" title="Editar">✏️</a> -->
                     
                     <!-- Botón para eliminar la appointment -->
-                    <a href="delete_appointments.php?id=<?php echo $row['appointments_id']; ?>" title="Eliminar" onclick="return confirmDelete()">🗑️</a>
+                    <a href="delete_appointments.php?id=<?php echo $row['appointments_id']; ?>" title="Eliminar cita" onclick="return confirmDelete()">🗑️</a>
                 </div>
             </div>
         <?php endwhile; ?>
