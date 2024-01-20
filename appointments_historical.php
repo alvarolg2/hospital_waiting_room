@@ -38,7 +38,7 @@ $result = $connection->query($query);
             <strong>Medico</strong>
         </div>
         <div class="grid-item-content">
-            <strong>Urgency</strong>
+            <strong>Urgencia</strong>
         </div>
         <div class="grid-item-content">
             <strong>Estado</strong>
@@ -63,6 +63,7 @@ $result = $connection->query($query);
                     <?php echo htmlspecialchars($row["status"]); ?>
                 </div>
                 <div class="grid-item-content action-icons">
+                    <a href="show_appointments.php?id=<?php echo $row["appointments_id"]; ?>" title="Ver cita">👁️</a>
                     <a href="delete_appointments_soft.php?id=<?php echo $row["appointments_id"]; ?>" title="Eliminar" onclick="return confirmDelete()">🗑️</a>
                 </div>
             </div>

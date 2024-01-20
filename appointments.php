@@ -15,6 +15,7 @@ $query = "SELECT appointments.*, urgency.name AS urgency_name, urgency.priority 
           JOIN urgency ON appointments.Urgency_category_id = urgency.urgency_id
           JOIN staff ON appointments.Staff_staff_id = staff.staff_id
           JOIN patients ON appointments.Patients_patients_id = patients.patients_id
+          WHERE appointments.status != 'completed'
           ORDER BY urgency.priority ASC, appointments.create_time ASC";
 $result = $connection->query($query);
 ?>
@@ -30,13 +31,13 @@ $result = $connection->query($query);
 <div class="grid-container">
     <div class="grid-item header">
         <div class="grid-item-content">
-            <strong>Patient</strong>
+            <strong>Paciente</strong>
         </div>
         <div class="grid-item-content">
-            <strong>Medico</strong>
+            <strong>Personal</strong>
         </div>
         <div class="grid-item-content">
-            <strong>Urgency</strong>
+            <strong>Urgencia</strong>
         </div>
         <div class="grid-item-content">
             <strong>Estado</strong>

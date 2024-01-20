@@ -8,8 +8,8 @@
 <body>
     <div class="login-container">
         <div class="tabs">
-            <button class="tab-button active" onclick="selectRole('patients')" id="tab-patient">Patient</button>
-            <button class="tab-button" onclick="selectRole('staff')" id="tab-staff">Staff</button>
+            <button class="tab-button active" onclick="selectRole('patients')" id="tab-patient">Paciente</button>
+            <button class="tab-button" onclick="selectRole('staff')" id="tab-staff">Personal</button>
         </div>
         <form id="loginForm" action="login.php" method="post">
             <input type="hidden" id="role" name="role" value="patients">
@@ -28,19 +28,19 @@
             <button type="submit" class="submit-button">Iniciar Sesión</button>
         </form>
         <div class="create-patient" id="create-patient-section">
-            <a href="create_patient.php" class="create-patient-button">Registrar Nuevo Patient</a>
+            <a href="create_patient.php" class="create-patient-button">Registrar Nuevo Paciente</a>
         </div>
     </div>
 
     <script>
         function selectRole(role) {
-            console.log('Rol seleccionado:', role); // Mensaje de depuración
+            console.log('Rol seleccionado:', role);
             document.getElementById('role').value = role;
             document.getElementById('tab-patient').classList.remove('active');
             document.getElementById('tab-staff').classList.remove('active');
 
             var createPatientsection = document.getElementById('create-patient-section');
-            console.log('Sección para crear patient:', createPatientsection); // Mensaje de depuración
+            console.log('Sección para crear patient:', createPatientsection); 
 
             if (role === 'patients') {
                 document.getElementById('tab-patient').classList.add('active');
@@ -55,7 +55,7 @@
                 superUserGroup.style.display = 'block';
             } else {
                 superUserGroup.style.display = 'none';
-                document.getElementById('superuser').checked = false; // Reinicia el checkbox
+                document.getElementById('superuser').checked = false; 
             }
         }
     </script>

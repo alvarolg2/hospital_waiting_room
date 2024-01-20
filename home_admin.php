@@ -31,9 +31,9 @@ $username = $_SESSION['user'];
     
     <!-- Contenedor de Pestañas -->
 <div class="tabs">
-    <button class="tab-button" onclick="openTab(event, 'urgency')">Urgency</button>
-    <button class="tab-button" onclick="openTab(event, 'job')">Job</button>
-    <button class="tab-button" onclick="openTab(event, 'staff')">Staff</button>
+    <button class="tab-button" onclick="openTab(event, 'urgency')">Urgencia</button>
+    <button class="tab-button" onclick="openTab(event, 'job')">Trabajo</button>
+    <button class="tab-button" onclick="openTab(event, 'staff')">Personal</button>
 </div>
 
 <!-- Contenido de las Pestañas -->

@@ -32,7 +32,7 @@ $result = $connection->query($query);
                 </div>
                 <!-- Columna de acciones con emojis en línea horizontal -->
                 <div class="grid-item-content action-icons">
-                    <a href="edit_job.php?id=<?php echo $row["job_id"]; ?>" title="Editar staff">✏️</a>
+                    <a href="edit_job.php?id=<?php echo $row["job_id"]; ?>" title="Editar personal">✏️</a>
                 </div>
             </div>
         <?php endwhile; ?>

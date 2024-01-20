@@ -39,6 +39,8 @@ function calculateEstimatedTime($appointmentId, $connection) {
 
     // Calcular el tiempo estimado en minutos
     $tiempoEstimadoMinutos = $appointmentsAntes * $duracionPromedio;
+    // Redondeo con dos decimales
+    $tiempoEstimadoMinutos = round($tiempoEstimadoMinutos, 2);
     return $tiempoEstimadoMinutos;
 }
 

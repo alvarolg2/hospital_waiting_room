@@ -50,7 +50,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Crear Staff</title>
+    <title>Crear personal</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <div class="appbar">
@@ -72,7 +72,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </div>
 
     <div class="form-container">
-        <h2>Crear Appointment para Patient</h2>
+        <h2>Crear cita para paciente</h2>
 
         <!-- Muestra mensajes de éxito o error -->
         <?php if ($msg): ?>
@@ -85,17 +85,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <input type="hidden" name="patient_id" value="<?php echo htmlspecialchars($patient_id); ?>">
 
             <div class="input-group">
-                <label for="urgency_reason">Motivo de la Urgency:</label>
+                <label for="urgency_reason">Motivo de la urgencia:</label>
                 <textarea id="urgency_reason" name="urgency_reason" rows="4" cols="50" class="text-input"></textarea>
             </div>
 
             <div class="input-group">
-                <label for="observations">Observations:</label>
+                <label for="observations">Observaciones:</label>
                 <textarea id="observations" name="observations" rows="4" cols="50" class="text-input"></textarea>
             </div>
 
             <div class="input-group">
-                <label for="urgency_id">Urgency:</label>
+                <label for="urgency_id">Urgencia:</label>
                 <select id="urgency_id" name="urgency_id" class="select-input">
                     <?php foreach ($urgencys as $urgency): ?>
                         <option value="<?php echo $urgency['urgency_id']; ?>"><?php echo htmlspecialchars($urgency['name']); ?></option>
@@ -103,7 +103,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </select>
             </div>
 
-            <button type="submit" class="submit-button">Crear Appointment</button>
+            <button type="submit" class="submit-button">Crear cita</button>
         </form>
     </div>
 </body>

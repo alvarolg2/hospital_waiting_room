@@ -24,7 +24,9 @@ if ($appointments_id) {
         $urgency_id = $row['Urgency_category_id'];
         $urgency_reason = $row['urgency_reason'];
         $observations = $row['observations'];
-        // Asumir más campos si existen
+        $medication = $row['medication'];  
+        $create_time = $row['create_time']; 
+        $finish_time = $row['finish_time']; 
     }
     $stmt->close();
 }
@@ -67,7 +69,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Editar cita</title>
+    <title>Ver detalles de la cita</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -80,42 +82,52 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
     </div>
 
-<div class="form-container">
-    <h2>Editar cita</h2>
-    <?php if ($msg): ?>
-        <p><?php echo $msg; ?></p>
-    <?php endif; ?>
-    <form action="edit_appointments.php?id=<?php echo htmlspecialchars($appointments_id); ?>" method="post">
-        <input type="hidden" name="appointments_id" value="<?php echo htmlspecialchars($appointments_id); ?>">
+    <div class="form-container">
+        <h2>Detalles de la cita</h2>
+        <?php if ($msg): ?>
+            <p><?php echo $msg; ?></p>
+        <?php endif; ?>
 
-        <!-- Campo para motivo de la urgency -->
+        <!-- Motivo de la urgencia -->
         <div class="input-group">
-            <label for="urgency_reason">Motivo de la urgencia:</label>
-            <textarea id="urgency_reason" name="urgency_reason" rows="4" cols="50"><?php echo htmlspecialchars($urgency_reason); ?></textarea>
+            <label><strong>Motivo de la urgencia:</strong></label>
+            <p><?php echo htmlspecialchars($urgency_reason); ?></p>
         </div>
 
-        <!-- Campo para observations -->
+        <!-- Observaciones -->
         <div class="input-group">
-            <label for="observations">Observaciones:</label>
-            <textarea id="observations" name="observations" rows="4" cols="50"><?php echo htmlspecialchars($observations); ?></textarea>
+            <label><strong>Observaciones:</strong></label>
+            <p><?php echo htmlspecialchars($observations); ?></p>
+        </div>
+        <!-- Medicación -->
+        <div class="input-group">
+            <label><strong>Medicación:</strong></label>
+            <p><?php echo htmlspecialchars($medication); ?></p>
+        </div>
+        <!-- Urgencia seleccionada -->
+        <div class="input-group">
+            <label><strong>Urgencia:</strong></label>
+            <?php foreach ($urgencys as $urgency): ?>
+                <?php if ($urgency['urgency_id'] == $urgency_id): ?>
+                    <p><?php echo htmlspecialchars($urgency['name']); ?></p>
+                <?php endif; ?>
+            <?php endforeach; ?>
+        </div>
+        <!-- Fecha de creación de la cita -->
+        <div class="input-group">
+            <label><strong>Fecha de Creación:</strong></label>
+            <p><?php echo htmlspecialchars($create_time); ?></p>
         </div>
 
-        <!-- Selector de urgency -->
-        <div class="input-group">
-            <label for="urgency_id">Urgencia:</label>
-            <select id="urgency_id" name="urgency_id">
-                <?php foreach ($urgencys as $urgency): ?>
-                    <option value="<?php echo $urgency['urgency_id']; ?>" <?php if ($urgency['urgency_id'] == $urgency_id) echo 'selected'; ?>>
-                        <?php echo htmlspecialchars($urgency['name']); ?>
-                    </option>
-                <?php endforeach; ?>
-            </select>
-        </div>
-
-        <div class="input-group">
-            <button type="submit" class="submit-button">Guardar Cambios</button>
-        </div>
-    </form>
-</div>
+        <!-- Fecha de finalización de la cita (si está disponible) -->
+        <?php if ($finish_time): ?>
+            <div class="input-group">
+                <label><strong>Fecha de Finalización:</strong></label>
+                <p><?php echo htmlspecialchars($finish_time); ?></p>
+            </div>
+        <?php endif; ?>
+    </div>
 </body>
 </html>
+
+

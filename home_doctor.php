@@ -18,7 +18,7 @@ $user = $_SESSION['user'];
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
-<body onload="openTab(null, 'patients')">
+<body onload="openTab(null, 'appointments_doctor')">
     <div class="appbar">
         <div class="appbar-left">
             Bienvenido, <?php echo htmlspecialchars($user); ?>
@@ -31,7 +31,7 @@ $user = $_SESSION['user'];
     
     <!-- Contenedor de Pestañas -->
 <div class="tabs">
-    <button class="tab-button" onclick="openTab(event, 'appointments_doctor')">Appointments</button>
+    <button class="tab-button" onclick="openTab(event, 'appointments_doctor')">Citas</button>
 </div>
 
 <!-- Contenido de las Pestañas -->
@@ -59,15 +59,16 @@ $user = $_SESSION['user'];
 
             // Muestra el contenido de la pestaña actual
             document.getElementById(tabName).style.display = "block";
-            
+
+            // Encuentra y activa el botón correspondiente
+            var activeTab;
             if (evt) {
-                evt.currentTarget.classList.add("active");
+                evt.preventDefault();
             } else {
-                // Para la carga inicial, encuentra y activa el botón correspondiente
-                var activeTab = document.querySelector(`.tab-button[onclick="openTab(event, '${tabName}')"]`);
-                if (activeTab) {
-                    activeTab.classList.add("active");
-                }
+                activeTab = document.querySelector(`.tab-button[onclick="openTab(event, '${tabName}')"]`);
+            }
+            if (activeTab) {
+                activeTab.classList.add("active");
             }
 
             // Llamada AJAX para cargar el contenido de la pestaña

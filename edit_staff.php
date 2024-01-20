@@ -59,7 +59,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Editar Staff</title>
+    <title>Editar personal</title>
     <link rel="stylesheet" href="css/style.css"> 
 </head>
 <body>
@@ -72,7 +72,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </div>
 </div>
     <div class="form-container">
-        <h2>Editar Staff</h2>
+        <h2>Editar personal</h2>
         <?php if ($msg): ?>
             <p><?php echo $msg; ?></p>
         <?php endif; ?>
@@ -89,7 +89,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <input type="email" id="email" name="email" value="<?php echo htmlspecialchars($row['email']); ?>" required>
             </div>
             <div class="input-group">
-                <label for="job_id">Job:</label>
+                <label for="job_id">Trabajo:</label>
                 <select id="job_id" name="job_id" required>
                     <?php foreach ($jobs as $job): ?>
                         <option value="<?php echo $job['job_id']; ?>" <?php echo $job['job_id'] == $row['Job_job_id'] ? 'selected' : ''; ?>>

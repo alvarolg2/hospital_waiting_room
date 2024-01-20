@@ -7,7 +7,7 @@
 </head>
 <body>
     <div class="form-container">
-        <h2>Añadir Nuevo Patient</h2>
+        <h2>Añadir Nuevo Paciente</h2>
         <form id="addPatientForm" action="create_patient.php" method="post">
             <div class="input-group">
                 <label for="username">Nombre de Usuario:</label>
@@ -18,10 +18,10 @@
                 <input type="password" id="password" name="passwordUser" required>
             </div>
             <div class="input-group">
-                <label for="email">Email:</label>
+                <label for="email">E-mail:</label>
                 <input type="email" id="email" name="email" required>
             </div>
-            <button type="submit" class="submit-button">Añadir patient</button>
+            <button type="submit" class="submit-button">Añadir paciente</button>
         </form>
     </div>
 

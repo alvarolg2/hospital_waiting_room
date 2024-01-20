@@ -39,7 +39,7 @@ $result = $connection->query($query);
                 </div>
                 <div class="grid-item-content action-icons">
                     <?php if ($row['tiene_appointment'] > 0): ?>
-                        <span title="Este patient ya tiene una appointment">⏰</span>
+                        <a title="Este patient ya tiene una appointment">⏰</a>
                     <?php else: ?>
                         <a href="create_appointment.php?patient_id=<?php echo $row['patients_id']; ?>" title="Crear Appointment">📅</a>
                     <?php endif; ?>

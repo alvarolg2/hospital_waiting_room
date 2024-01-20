@@ -238,13 +238,15 @@ input[type="text"], input[type="password"] {
 .appbar-left {
     display: flex;
     align-items: center;
-    padding-left: 20px; /* Espacio antes del enlace */
+    padding-left: 20px; 
     padding-right: 20px;
 }
 
 .appbar-right {
     display: flex;
-    align-items: center;
+    align-items: start;
+    padding-left: 20px; 
+    padding-right: 20px;
 }
 
 .appbar-right a {

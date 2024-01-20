@@ -48,7 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Editar Staff</title>
+    <title>Editar personal</title>
     <link rel="stylesheet" href="css/style.css"> 
 </head>
 <body>
@@ -61,7 +61,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </div>
 </div>
     <div class="form-container">
-        <h2>Editar patient</h2>
+        <h2>Editar paciente</h2>
         <?php if ($msg): ?>
             <p><?php echo $msg; ?></p>
         <?php endif; ?>

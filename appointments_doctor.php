@@ -66,7 +66,7 @@ $result = $connection->query($query);
                     <a href="call_patient.php?id=<?php echo $row['appointments_id']; ?>" title="Llamar paciente">📞</a>
                     
                     <!-- Botón para ver detalles de la appointment -->
-                    <a href="show_appointment.php?id=<?php echo $row['appointments_id']; ?>" title="Ver cita">👁️</a>
+                    <a href="show_appointments.php?id=<?php echo $row["appointments_id"]; ?>" title="Ver cita">👁️</a>
 
                     <!-- Botón para editar la appointment (opcional si no se necesita editar) -->
                     <!-- <a href="edit_appointments.php?id=<?php echo $row['appointments_id']; ?>" title="Editar">✏️</a> -->
