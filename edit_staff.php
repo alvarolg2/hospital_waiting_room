@@ -13,7 +13,7 @@ $staff_id = isset($_GET['id']) ? $_GET['id'] : '';
 $msg = '';
 
 $jobs = array();
-$queryJobs = "SELECT * FROM job"; // Asegúrate de que los nombres de columna y tabla sean correctos
+$queryJobs = "SELECT * FROM job"; 
 $resultJobs = $connection->query($queryJobs);
 
 if ($resultJobs) {
@@ -44,7 +44,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($stmt->execute()) {
         $msg = "Datos actualizados con éxito.";
-        // Vuelve a cargar los datos actualizados
         header("Location: home_admin.php");
         exit();
     } else {

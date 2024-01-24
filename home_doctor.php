@@ -27,16 +27,11 @@ $user = $_SESSION['user'];
             <a href="logout.php">Cerrar sesión</a>
         </div>
     </div>
-
-    
-    <!-- Contenedor de Pestañas -->
 <div class="tabs">
     <button class="tab-button" onclick="openTab(event, 'appointments_doctor')">Citas</button>
 </div>
 
-<!-- Contenido de las Pestañas -->
 <div id="appointments_doctor" class="tabcontent">
-    <!-- Contenido de Job -->
 </div>
 <a href="#" id="floatingButton" class="floating-button">
     <i class="fas fa-plus"></i>
@@ -71,7 +66,6 @@ $user = $_SESSION['user'];
                 activeTab.classList.add("active");
             }
 
-            // Llamada AJAX para cargar el contenido de la pestaña
             var xhr = new XMLHttpRequest();
             xhr.onreadystatechange = function() {
                 if (this.readyState == 4 && this.status == 200) {
@@ -90,7 +84,6 @@ $user = $_SESSION['user'];
                     floatingButton.style.display = 'none';
             }
         }
-        // Añade el event listener para DOMContentLoaded
         document.addEventListener("DOMContentLoaded", function() {
             openTab(null, 'appointments_doctor');
         });

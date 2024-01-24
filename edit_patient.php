@@ -33,7 +33,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($stmt->execute()) {
         $msg = "Datos actualizados con éxito.";
-        // Vuelve a cargar los datos actualizados
         header("Location: home_staf.php?tab=appointments");
         exit();
     } else {

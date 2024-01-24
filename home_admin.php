@@ -28,23 +28,16 @@ $username = $_SESSION['user'];
         </div>
     </div>
 
-    
-    <!-- Contenedor de Pestañas -->
 <div class="tabs">
     <button class="tab-button" onclick="openTab(event, 'urgency')">Urgencia</button>
     <button class="tab-button" onclick="openTab(event, 'job')">Trabajo</button>
     <button class="tab-button" onclick="openTab(event, 'staff')">Personal</button>
 </div>
-
-<!-- Contenido de las Pestañas -->
 <div id="urgency" class="tabcontent">
-    <!-- Contenido de Urgency -->
 </div>
 <div id="job" class="tabcontent">
-    <!-- Contenido de Job -->
 </div>
 <div id="staff" class="tabcontent">
-    <!-- Contenido de Staff -->
 </div>
 <a href="#" id="floatingButton" class="floating-button">
     <i class="fas fa-plus"></i>
@@ -77,8 +70,7 @@ $username = $_SESSION['user'];
                     activeTab.classList.add("active");
                 }
             }
-
-            // Llamada AJAX para cargar el contenido de la pestaña
+            
             var xhr = new XMLHttpRequest();
             xhr.onreadystatechange = function() {
                 if (this.readyState == 4 && this.status == 200) {

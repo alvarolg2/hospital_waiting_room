@@ -16,7 +16,6 @@ $result = $connection->query($query);
 </head>
 <body>
 <div class="grid-container">
-    <!-- Encabezados de la cuadrícula -->
     <div class="grid-item header">
         <div class="grid-item-content">
             <strong>Usuario</strong>

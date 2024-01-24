@@ -20,7 +20,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if ($updateStmt->execute()) {
         echo "Cita actualizada con éxito.";
         header("Location: home_doctor.php");
-        // Aquí podrías agregar una redirección o alguna otra acción
     } else {
         echo "Error al actualizar la cita.";
         header("Location: home_doctor.php");

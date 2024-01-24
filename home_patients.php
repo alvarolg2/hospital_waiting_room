@@ -57,7 +57,6 @@ $query = "SELECT appointments.*, patients.username AS patients_username, TIMESTA
 $result = $connection->query($query);
 $appointment = mysqli_fetch_assoc($result);
 
-// Calcula el tiempo estimado si la appointment existe
 if ($appointment) {
     $tiempoEstimado = calculateEstimatedTime($appointment['appointments_id'], $connection);
 }
@@ -81,7 +80,6 @@ if ($appointment) {
         </div>
     </div>
 <div id="callingNotice" class="notification">
-    <!-- El mensaje de aviso se mostrará aquí -->
 </div>
     <?php if ($appointment): ?>
         <div class="tarjeta-appointment">
@@ -134,8 +132,8 @@ if ($appointment) {
         xhr.send('appointmentId=' + appointmentId);
     }
 
-    setInterval(verificarSiSeLlamaAlPaciente, 60000); // Verificar cada 60 segundos
-    verificarSiSeLlamaAlPaciente(); // Verificar al cargar la página
+    setInterval(verificarSiSeLlamaAlPaciente, 60000);
+    verificarSiSeLlamaAlPaciente(); 
 </script>
 </body>
 </html>

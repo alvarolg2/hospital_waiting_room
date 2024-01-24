@@ -20,11 +20,9 @@ if ($appointments_id) {
     $stmt->execute();
     $result = $stmt->get_result();
     if ($row = $result->fetch_assoc()) {
-        // Asignar los valores existentes a las variables
         $urgency_id = $row['Urgency_category_id'];
         $urgency_reason = $row['urgency_reason'];
         $observations = $row['observations'];
-        // Asumir más campos si existen
     }
     $stmt->close();
 }
@@ -45,7 +43,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $urgency_id = $_POST['urgency_id'];
     $urgency_reason = $_POST['urgency_reason'];
     $observations = $_POST['observations'];
-    // Asume otros campos como staff_id, patients_id, etc.
 
     // Actualizar la base de datos
     $stmt = $connection->prepare("UPDATE appointments SET Urgency_category_id = ?, urgency_reason = ?, observations = ? WHERE appointments_id = ?");
@@ -88,19 +85,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <form action="edit_appointments.php?id=<?php echo htmlspecialchars($appointments_id); ?>" method="post">
         <input type="hidden" name="appointments_id" value="<?php echo htmlspecialchars($appointments_id); ?>">
 
-        <!-- Campo para motivo de la urgency -->
         <div class="input-group">
             <label for="urgency_reason">Motivo de la urgencia:</label>
             <textarea id="urgency_reason" name="urgency_reason" rows="4" cols="50"><?php echo htmlspecialchars($urgency_reason); ?></textarea>
         </div>
 
-        <!-- Campo para observations -->
         <div class="input-group">
             <label for="observations">Observaciones:</label>
             <textarea id="observations" name="observations" rows="4" cols="50"><?php echo htmlspecialchars($observations); ?></textarea>
         </div>
 
-        <!-- Selector de urgency -->
         <div class="input-group">
             <label for="urgency_id">Urgencia:</label>
             <select id="urgency_id" name="urgency_id">

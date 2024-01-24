@@ -26,8 +26,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST['email'];
     $job_id = $_POST['job_id'];
 
-    // Agregar lógica para validar los datos aquí (importante para seguridad)
-
     // Insertar los datos en la base de datos
     $stmt = $connection->prepare("INSERT INTO staff (username, password, email, Job_job_id) VALUES (?, ?, ?, ?)");
     $stmt->bind_param("sssi", $username, $password, $email, $job_id);

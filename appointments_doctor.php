@@ -62,16 +62,8 @@ $result = $connection->query($query);
                     <?php echo htmlspecialchars($row["status"]); ?>
                 </div>
                 <div class="grid-item-content action-icons">
-                    <!-- Botón para llamar al patient (ejemplo, utilizando JavaScript) -->
                     <a href="call_patient.php?id=<?php echo $row['appointments_id']; ?>" title="Llamar paciente">📞</a>
-                    
-                    <!-- Botón para ver detalles de la appointment -->
                     <a href="show_appointments.php?id=<?php echo $row["appointments_id"]; ?>" title="Ver cita">👁️</a>
-
-                    <!-- Botón para editar la appointment (opcional si no se necesita editar) -->
-                    <!-- <a href="edit_appointments.php?id=<?php echo $row['appointments_id']; ?>" title="Editar">✏️</a> -->
-                    
-                    <!-- Botón para eliminar la appointment -->
                     <a href="delete_appointments.php?id=<?php echo $row['appointments_id']; ?>" title="Eliminar cita" onclick="return confirmDelete()">🗑️</a>
                 </div>
             </div>
@@ -86,8 +78,6 @@ function confirmDelete() {
 }
 
 function callPatient(appointmentId) {
-    // Aquí puedes agregar la lógica para llamar al patient
-    // Por ejemplo, mostrar una notificación, abrir una nueva ventana, etc.
     alert("Llamando al patient de la appointment " + appointmentId);
 }
 </script>

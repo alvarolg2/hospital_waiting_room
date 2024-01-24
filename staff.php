@@ -1,5 +1,5 @@
 <?php
-include 'db_connect.php'; // Asegúrate de que este archivo contiene la lógica de conexión a tu base de datos
+include 'db_connect.php'; 
 
 $query = "SELECT staff.staff_id as staff_id, staff.username, staff.email, job.name AS job_nombre FROM staff 
           JOIN job ON staff.Job_job_id = job.job_id
@@ -16,7 +16,6 @@ $result = $connection->query($query);
 </head>
 <body>
 <div class="grid-container">
-    <!-- Encabezados de la cuadrícula -->
     <div class="grid-item header">
         <div class="grid-item-content">
             <strong>Usuario</strong>

@@ -10,7 +10,7 @@ if (!isset($_SESSION['user'])) {
 $user = $_SESSION['user'];
 $msg = '';
 
-// Obtener el ID de la appointment a editar
+// Obtener el ID de la appointment a mostrar
 $appointments_id = isset($_GET['id']) ? $_GET['id'] : '';
 
 // Consultar los datos actuales de la appointment
@@ -20,7 +20,6 @@ if ($appointments_id) {
     $stmt->execute();
     $result = $stmt->get_result();
     if ($row = $result->fetch_assoc()) {
-        // Asignar los valores existentes a las variables
         $urgency_id = $row['Urgency_category_id'];
         $urgency_reason = $row['urgency_reason'];
         $observations = $row['observations'];
@@ -47,9 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $urgency_id = $_POST['urgency_id'];
     $urgency_reason = $_POST['urgency_reason'];
     $observations = $_POST['observations'];
-    // Asume otros campos como staff_id, patients_id, etc.
 
-    // Actualizar la base de datos
     $stmt = $connection->prepare("UPDATE appointments SET Urgency_category_id = ?, urgency_reason = ?, observations = ? WHERE appointments_id = ?");
     $stmt->bind_param("issi", $urgency_id, $urgency_reason, $observations, $appointments_id);
 
@@ -87,24 +84,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <?php if ($msg): ?>
             <p><?php echo $msg; ?></p>
         <?php endif; ?>
-
-        <!-- Motivo de la urgencia -->
         <div class="input-group">
             <label><strong>Motivo de la urgencia:</strong></label>
             <p><?php echo htmlspecialchars($urgency_reason); ?></p>
         </div>
-
-        <!-- Observaciones -->
         <div class="input-group">
             <label><strong>Observaciones:</strong></label>
             <p><?php echo htmlspecialchars($observations); ?></p>
         </div>
-        <!-- Medicación -->
         <div class="input-group">
             <label><strong>Medicación:</strong></label>
             <p><?php echo htmlspecialchars($medication); ?></p>
         </div>
-        <!-- Urgencia seleccionada -->
         <div class="input-group">
             <label><strong>Urgencia:</strong></label>
             <?php foreach ($urgencys as $urgency): ?>
@@ -113,13 +104,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <?php endif; ?>
             <?php endforeach; ?>
         </div>
-        <!-- Fecha de creación de la cita -->
         <div class="input-group">
             <label><strong>Fecha de Creación:</strong></label>
             <p><?php echo htmlspecialchars($create_time); ?></p>
         </div>
-
-        <!-- Fecha de finalización de la cita (si está disponible) -->
         <?php if ($finish_time): ?>
             <div class="input-group">
                 <label><strong>Fecha de Finalización:</strong></label>

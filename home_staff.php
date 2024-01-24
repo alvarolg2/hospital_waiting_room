@@ -27,24 +27,16 @@ $user = $_SESSION['user'];
             <a href="logout.php">Cerrar sesión</a>
         </div>
     </div>
-
-    
-    <!-- Contenedor de Pestañas -->
 <div class="tabs">
     <button class="tab-button" onclick="openTab(event, 'patients')">Pacientes</button>
     <button class="tab-button" onclick="openTab(event, 'appointments')">Citas activas</button>
     <button class="tab-button" onclick="openTab(event, 'appointments_historical')">Historico de citas</button>
 </div>
-
-<!-- Contenido de las Pestañas -->
 <div id="patients" class="tabcontent">
-    <!-- Contenido de Urgency -->
 </div>
 <div id="appointments" class="tabcontent">
-    <!-- Contenido de Job -->
 </div>
 <div id="appointments_historical" class="tabcontent">
-    <!-- Contenido de Job -->
 </div>
 <a href="#" id="floatingButton" class="floating-button">
     <i class="fas fa-plus"></i>
@@ -78,7 +70,6 @@ $user = $_SESSION['user'];
                 }
             }
 
-            // Llamada AJAX para cargar el contenido de la pestaña
             var xhr = new XMLHttpRequest();
             xhr.onreadystatechange = function() {
                 if (this.readyState == 4 && this.status == 200) {
@@ -97,7 +88,6 @@ $user = $_SESSION['user'];
                     floatingButton.style.display = 'none';
             }
         }
-        // Añade el event listener para DOMContentLoaded
         document.addEventListener("DOMContentLoaded", function() {
             openTab(null, 'patients');
         });

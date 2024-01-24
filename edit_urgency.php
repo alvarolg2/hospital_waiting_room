@@ -21,7 +21,7 @@ if ($urgency_id) {
         $row = $result->fetch_assoc();
     } else {
         $msg = "No se encontró la urgency con el ID especificado.";
-        $row = array('name' => '');  // Asegúrate de que la variable $row esté definida incluso si no se encontraron resultados
+        $row = array('name' => '');
     }
     $stmt->close();
 }
